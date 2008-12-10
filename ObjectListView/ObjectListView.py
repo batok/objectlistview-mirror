@@ -99,7 +99,7 @@ import time
 
 import CellEditor
 import OLVEvent
-
+from sys import platform
 
 class ObjectListView(wx.ListCtrl):
     """
@@ -2234,8 +2234,7 @@ class AbstractVirtualObjectListView(ObjectListView):
         """
         # We can only refresh everything
         self.lastGetObjectIndex = -1
-	print self.GetItemCount()
-	if self.GetItemCount() == 0:
+	if self.GetItemCount() == 0 and platform == "darwin":
 		pass
 	else:
         	self.RefreshItems(0, self.GetItemCount()-1)
@@ -2500,7 +2499,7 @@ class FastObjectListView(AbstractVirtualObjectListView):
                 if idx != -1:
                     self.RefreshItem(idx)
         else:
-	    if self.GetItemCount() == 0:
+	    if self.GetItemCount() == 0 and platform == "darwin":
 	        pass
 	    else:
                 self.RefreshItems(0, self.GetItemCount() - 1)
